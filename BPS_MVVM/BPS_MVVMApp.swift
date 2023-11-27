@@ -8,13 +8,19 @@
 import SwiftUI
 
 @main
+
 struct BPS_MVVMApp: App {
     let persistenceController = PersistenceController.shared
-
+    
+    @StateObject var bpItemViewModel = BPItemViewModel()
+    @StateObject var theme = Theme.shared
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomePageView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(bpItemViewModel)
+                //.environmentObject(theme)
         }
     }
 }
